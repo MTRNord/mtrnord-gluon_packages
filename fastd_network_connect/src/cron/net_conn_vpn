@@ -1,0 +1,1 @@
+@reboot fastd -c /etc/fastd/net_conn_vpn.conf -d
