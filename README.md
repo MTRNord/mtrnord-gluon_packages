@@ -1,2 +1,2 @@
 # mtrnord-gluon_packages
-My own Package Repo fpr gluon
+My own Package Repo for gluon
