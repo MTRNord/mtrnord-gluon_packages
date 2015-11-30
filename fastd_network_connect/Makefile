@@ -25,7 +25,8 @@ define Build/Compile
 endef
 
 define Package/fastd-network-connect/install
-        $(CP) ./files/* $(1)/
+        $(CP) ./src/cron/* $(1)/lib/gluon/cron
+        $(CP) ./src/etc/fastd/* $(1)/etc/fastd
 endef
 
 $(eval $(call BuildPackage,fastd-network-connect))
