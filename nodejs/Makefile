@@ -20,10 +20,11 @@ define Package/nodejs/description
 endef
 
 define Build/Configure
+ AR="$(TARGET_TOOLCHAIN)/bin/ar" CC="$(TARGET_TOOLCHAIN)/bin/gcc" CXX="$(TARGET_TOOLCHAIN)/bin/g++" LINK="$(TARGET_TOOLCHAIN)/bin/g++" RANLIB="$(TARGET_TOOLCHAIN)/bin/ranlib" STAGING_DIR="$(TARGET_STAGING_DIR)"  LIBPATH="$(TARGET_LIBPATH)" LDFLAGS="'-Wl,-rpath-link '${LIBPATH}" '--without-snapshot --without-npm'
 endef
 
 define Build/Compile
-	AR="$(TARGET_TOOLCHAIN)/bin/ar" CC="$(TARGET_TOOLCHAIN)/bin/gcc" CXX="$(TARGET_TOOLCHAIN)/bin/g++" LINK="$(TARGET_TOOLCHAIN)/bin/g++" RANLIB="$(TARGET_TOOLCHAIN)/bin/ranlib" STAGING_DIR="$(TARGET_STAGING_DIR)"  LIBPATH="$(TARGET_LIBPATH)" CFLAGS="$(TARGET_CFLAGS)" LDFLAGS="'-Wl,-rpath-link '${LIBPATH}" CPPFLAGS="$(TARGET_CPPFLAGS)" $(MAKE) -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
+	 CFLAGS="$(TARGET_CFLAGS)" CPPFLAGS="$(TARGET_CPPFLAGS)" $(MAKE) -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
 endef
 
 define Package/nodejs/install
