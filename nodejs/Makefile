@@ -21,7 +21,7 @@ define Package/nodejs
   CATEGORY:=Utilities
   DEPENDS:=
   TITLE:=nodejs
-  URL:=ADDTHIS
+  URL:=https://github.com/MTRNord/mtrnord_gluon_packages/tree/master/nodejs
 endef
 
 define Package/nodejs/description
