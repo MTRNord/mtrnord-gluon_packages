@@ -19,20 +19,36 @@ define Package/nodejs/description
  NodejsMinimal Version
 endef
 
+define Build/Prepare
+	export AR="$(TOOLCHAIN_DIR)/bin/ar"
+	export CC="$(TOOLCHAIN_DIR)/bin/gcc"
+	export CXX="$(TOOLCHAIN_DIR)/bin/g++"
+	export LINK="$(TOOLCHAIN_DIR)/bin/g++"
+	export RANLIB="$(TOOLCHAIN_DIR)/bin/ranlib"
+	export STAGING_DIR="$(STAGING_DIR)"
+	export LIBPATH="TOOLCHAIN_LIB_DIRS"
+	export LDFLAGS="'-Wl,-rpath-link '${LIBPATH}"
+	git clone https://github.com/nodejs/node.git
+	cd node
+	git checkout v6.x
+	cd $(TOPDIR)
+endef
+
 define Build/Configure
- AR="$(TARGET_TOOLCHAIN)/bin/ar" CC="$(TARGET_TOOLCHAIN)/bin/gcc" CXX="$(TARGET_TOOLCHAIN)/bin/g++" LINK="$(TARGET_TOOLCHAIN)/bin/g++" RANLIB="$(TARGET_TOOLCHAIN)/bin/ranlib" STAGING_DIR="$(TARGET_STAGING_DIR)"  LIBPATH="$(TARGET_LIBPATH)" LDFLAGS="'-Wl,-rpath-link '${LIBPATH}" '--without-snapshot --without-npm'
+  cd node
+  ./configure '--without-snapshot --without-npm'
+  cd $(TOPDIR)
 endef
 
 define Build/Compile
-	 CFLAGS="$(TARGET_CFLAGS)" CPPFLAGS="$(TARGET_CPPFLAGS)" $(MAKE) -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
+         cd node
+	 CFLAGS="$(TARGET_CFLAGS)" CPPFLAGS="$(TARGET_CPPFLAGS)" make -C $(PKG_BUILD_DIR) $(TARGET_CONFIGURE_OPTS)
+	 cd $(TOPDIR)
 endef
 
 define Package/nodejs/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_DIR) $(1)/lib/gluon/announce/statistics.d
-	$(CP) $(PKG_BUILD_DIR)/traffic_fastd $(1)/lib/gluon/announce/statistics.d/traffic_fastd
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/fastd-status $(1)/usr/bin/fastd-status
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/node $(1)/usr/bin/node
 endef
 
 $(eval $(call BuildPackage,nodejs))
