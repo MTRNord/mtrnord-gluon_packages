@@ -1,1 +1,6 @@
+Paket 'physical_web'
 
+config 'physical_web'
+  option 'title' 'Freifunk'
+  option 'description' 'Freifunk Service'
+  option 'url' 'https://freifunk.net/'
