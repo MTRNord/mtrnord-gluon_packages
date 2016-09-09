@@ -2,4 +2,4 @@
 url=$(uci -q get 'physical_web.url')
 title=$(uci -q get 'physical_web.title')
 desc=$(uci -q get 'physical_web.description')
-avahi-publish -s "example_name" _physicalweb._tcp 80 url=$url title=$title desc=$desc
+avahi-publish -s $title _physicalweb._tcp 80 url=$url title=$title desc=$desc
