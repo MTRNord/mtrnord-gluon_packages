@@ -25,7 +25,7 @@ define Build/Configure
 endef
 
 define Build/Compile
-	$(call GluonSrcDiet,./luasrc,$(PKG_BUILD_DIR)/luadest/)
+	echo "Nothing to really compile"
 endef
 
 define Package/physical_web/install
