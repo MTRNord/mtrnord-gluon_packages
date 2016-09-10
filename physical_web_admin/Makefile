@@ -29,8 +29,7 @@ define Build/Configure
 endef
 
 define Build/Compile
-	$(call GluonBuildI18N,physical_web_adminr,i18n)
-	$(call GluonSrcDiet,./luasrc,$(PKG_BUILD_DIR)/luadest/)
+	echo "No compile required"
 endef
 
 define Package/physical_web_admin/install
